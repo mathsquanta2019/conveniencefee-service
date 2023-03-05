@@ -1,0 +1,205 @@
+<hazelcast xmlns="http://www.hazelcast.com/schema/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.hazelcast.com/schema/config http://www.hazelcast.com/schema/config/hazelcast-config-5.2.xsd">
+    <!--license-key>****</license-key-->
+    <cluster-name>cfs.cluster</cluster-name>
+    <management-center scripting-enabled="true" console-enabled="true" data-access-enabled="true"/>
+    <properties>
+        <property name="hazelcast.rest.enabled">true</property>
+        <property name="hazelcast.management.center.url">http://localhost:8080/hazelcast-mancenter</property>
+        <property name="hazelcast.management.center.enabled">true</property>
+    </properties>
+    <security enabled="false">
+        <client-block-unmapped-actions>false</client-block-unmapped-actions>
+    </security>
+    <network>
+        <port port-count="100" auto-increment="true">5701</port>
+        <reuse-address>false</reuse-address>
+        <join>
+            <auto-detection enabled="true"/>
+            <multicast enabled="false">
+                <multicast-group>224.2.2.3</multicast-group>
+                <multicast-port>54327</multicast-port>
+                <multicast-timeout-seconds>2</multicast-timeout-seconds>
+                <multicast-time-to-live>32</multicast-time-to-live>
+            </multicast>
+            <tcp-ip enabled="true" connection-timeout-seconds="5">
+                <member-list>
+                    <member>localhost:5701</member>
+                    <member>localhost:5702</member>
+                    <member>localhost:5703</member>
+                </member-list>
+            </tcp-ip>
+            <aws enabled="false"/>
+            <gcp enabled="false"/>
+            <azure enabled="false"/>
+            <kubernetes enabled="false"/>
+            <eureka enabled="false"/>
+            <discovery-strategies/>
+        </join>
+        <interfaces enabled="false"/>
+        <ssl enabled="false"/>
+        <socket-interceptor enabled="false"/>
+        <rest-api enabled="true">
+            <endpoint-group name="CLUSTER_READ" enabled="true"/>
+            <endpoint-group name="CLUSTER_WRITE" enabled="false"/>
+            <endpoint-group name="HEALTH_CHECK" enabled="true"/>
+            <endpoint-group name="PERSISTENCE" enabled="false"/>
+            <endpoint-group name="HOT_RESTART" enabled="false"/>
+            <endpoint-group name="WAN" enabled="false"/>
+            <endpoint-group name="DATA" enabled="false"/>
+            <endpoint-group name="CP" enabled="false"/>
+        </rest-api>
+        <memcache-protocol enabled="false"/>
+    </network>
+    <map name="convenience.rules.map">
+        <in-memory-format>OBJECT</in-memory-format>
+        <statistics-enabled>true</statistics-enabled>
+        <per-entry-stats-enabled>false</per-entry-stats-enabled>
+        <cache-deserialized-values>INDEX-ONLY</cache-deserialized-values>
+        <backup-count>1</backup-count>
+        <async-backup-count>0</async-backup-count>
+        <time-to-live-seconds>0</time-to-live-seconds>
+        <max-idle-seconds>0</max-idle-seconds>
+        <merge-policy batch-size="100">com.hazelcast.spi.merge.PutIfAbsentMergePolicy</merge-policy>
+        <read-backup-data>false</read-backup-data>
+        <metadata-policy>CREATE_ON_UPDATE</metadata-policy>
+        <eviction size="2147483647" max-size-policy="PER_NODE" eviction-policy="LFU"/>
+        <event-journal enabled="false">
+            <capacity>10000</capacity>
+            <time-to-live-seconds>1800</time-to-live-seconds>
+        </event-journal>
+        <data-persistence enabled="false">
+            <fsync>false</fsync>
+        </data-persistence>
+        <map-store enabled="false" initial-mode="LAZY">
+            <write-coalescing>true</write-coalescing>
+            <offload>true</offload>
+            <write-delay-seconds>0</write-delay-seconds>
+            <write-batch-size>1</write-batch-size>
+        </map-store>
+        <near-cache name="default">
+            <in-memory-format>OBJECT</in-memory-format>
+            <invalidate-on-change>true</invalidate-on-change>
+            <time-to-live-seconds>1200</time-to-live-seconds>
+            <max-idle-seconds>60</max-idle-seconds>
+            <serialize-keys>false</serialize-keys>
+            <cache-local-entries>false</cache-local-entries>
+            <eviction size="10000" max-size-policy="ENTRY_COUNT" eviction-policy="LFU"/>
+        </near-cache>
+        <tiered-store enabled="false">
+            <memory-tier>
+                <capacity unit="MEGABYTES" value="50"/>
+            </memory-tier>
+            <disk-tier enabled="false" device-name="default-tiered-store-device"/>
+        </tiered-store>
+    </map>
+    <map name="subscription.service.map">
+        <in-memory-format>OBJECT</in-memory-format>
+        <statistics-enabled>true</statistics-enabled>
+        <per-entry-stats-enabled>false</per-entry-stats-enabled>
+        <cache-deserialized-values>INDEX-ONLY</cache-deserialized-values>
+        <backup-count>1</backup-count>
+        <async-backup-count>0</async-backup-count>
+        <time-to-live-seconds>0</time-to-live-seconds>
+        <max-idle-seconds>0</max-idle-seconds>
+        <merge-policy batch-size="100">com.hazelcast.spi.merge.PutIfAbsentMergePolicy</merge-policy>
+        <read-backup-data>false</read-backup-data>
+        <metadata-policy>CREATE_ON_UPDATE</metadata-policy>
+        <eviction size="2147483647" max-size-policy="PER_NODE" eviction-policy="LFU"/>
+        <event-journal enabled="false">
+            <capacity>10000</capacity>
+            <time-to-live-seconds>0</time-to-live-seconds>
+        </event-journal>
+        <data-persistence enabled="false">
+            <fsync>false</fsync>
+        </data-persistence>
+        <map-store enabled="false" initial-mode="LAZY">
+            <write-coalescing>true</write-coalescing>
+            <offload>true</offload>
+            <write-delay-seconds>0</write-delay-seconds>
+            <write-batch-size>1</write-batch-size>
+        </map-store>
+        <near-cache name="default">
+            <in-memory-format>OBJECT</in-memory-format>
+            <invalidate-on-change>true</invalidate-on-change>
+            <time-to-live-seconds>1200</time-to-live-seconds>
+            <max-idle-seconds>60</max-idle-seconds>
+            <serialize-keys>false</serialize-keys>
+            <cache-local-entries>false</cache-local-entries>
+            <eviction size="10000" max-size-policy="ENTRY_COUNT" eviction-policy="LFU"/>
+        </near-cache>
+        <tiered-store enabled="false">
+            <memory-tier>
+                <capacity unit="MEGABYTES" value="50"/>
+            </memory-tier>
+            <disk-tier enabled="false" device-name="default-tiered-store-device"/>
+        </tiered-store>
+    </map>
+    <map name="customer.management.map">
+        <in-memory-format>OBJECT</in-memory-format>
+        <statistics-enabled>true</statistics-enabled>
+        <per-entry-stats-enabled>false</per-entry-stats-enabled>
+        <cache-deserialized-values>INDEX-ONLY</cache-deserialized-values>
+        <backup-count>1</backup-count>
+        <async-backup-count>0</async-backup-count>
+        <time-to-live-seconds>0</time-to-live-seconds>
+        <max-idle-seconds>0</max-idle-seconds>
+        <merge-policy batch-size="100">com.hazelcast.spi.merge.PutIfAbsentMergePolicy</merge-policy>
+        <read-backup-data>false</read-backup-data>
+        <metadata-policy>CREATE_ON_UPDATE</metadata-policy>
+        <eviction size="2147483647" max-size-policy="PER_NODE" eviction-policy="LFU"/>
+        <event-journal enabled="false">
+            <capacity>10000</capacity>
+            <time-to-live-seconds>0</time-to-live-seconds>
+        </event-journal>
+        <data-persistence enabled="false">
+            <fsync>false</fsync>
+        </data-persistence>
+        <map-store enabled="false" initial-mode="LAZY">
+            <write-coalescing>true</write-coalescing>
+            <offload>true</offload>
+            <write-delay-seconds>0</write-delay-seconds>
+            <write-batch-size>1</write-batch-size>
+        </map-store>
+        <near-cache name="default">
+            <in-memory-format>OBJECT</in-memory-format>
+            <invalidate-on-change>true</invalidate-on-change>
+            <time-to-live-seconds>1200</time-to-live-seconds>
+            <max-idle-seconds>60</max-idle-seconds>
+            <serialize-keys>false</serialize-keys>
+            <cache-local-entries>false</cache-local-entries>
+            <eviction size="10000" max-size-policy="ENTRY_COUNT" eviction-policy="LFU"/>
+        </near-cache>
+        <tiered-store enabled="false">
+            <memory-tier>
+                <capacity unit="MEGABYTES" value="50"/>
+            </memory-tier>
+            <disk-tier enabled="false" device-name="default-tiered-store-device"/>
+        </tiered-store>
+    </map>
+    <metrics enabled="true">
+        <management-center enabled="true">
+            <retention-seconds>5</retention-seconds>
+        </management-center>
+        <jmx enabled="true"/>
+        <collection-frequency-seconds>5</collection-frequency-seconds>
+    </metrics>
+    <jet enabled="true" resource-upload-enabled="false">
+        <cooperative-thread-count>12</cooperative-thread-count>
+        <flow-control-period>100</flow-control-period>
+        <backup-count>1</backup-count>
+        <scale-up-delay-millis>10000</scale-up-delay-millis>
+        <lossless-restart-enabled>false</lossless-restart-enabled>
+        <max-processor-accumulated-records>9223372036854775807</max-processor-accumulated-records>
+        <edge-defaults>
+            <queue-size>1024</queue-size>
+            <packet-size-limit>16384</packet-size-limit>
+            <receive-window-multiplier>3</receive-window-multiplier>
+        </edge-defaults>
+    </jet>
+    <auditlog enabled="false"/>
+    <user-code-deployment enabled="false">
+        <class-cache-mode>ETERNAL</class-cache-mode>
+        <provider-mode>LOCAL_AND_CACHED_CLASSES</provider-mode>
+    </user-code-deployment>
+    <integrity-checker enabled="false"/>
+</hazelcast>

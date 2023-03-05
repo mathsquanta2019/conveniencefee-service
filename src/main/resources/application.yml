@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    name: cfdb
+    generate-unique-name: false
+  h2:
+    console:
+      enabled: true
+      path: /db
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/docs/
+      cache:
+        cachecontrol:
+          no-cache: true
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
+server:
+  port: 9090
+logging:
+  level:
+    root: info
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger.html
