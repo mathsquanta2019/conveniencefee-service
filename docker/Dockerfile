@@ -1,8 +1,15 @@
+FROM maven:3.8.1-openjdk-17-slim AS build
+
+COPY . .
+
+RUN mvn clean package
+
+
 FROM openjdk:17-jdk-alpine
 
-WORKDIR /app
 
-COPY target/cfs.jar .
+
+COPY --from=build /target/cfs.jar cfs.jar
 
 EXPOSE 9090
 
