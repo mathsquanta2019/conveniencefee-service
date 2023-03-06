@@ -1,9 +1,10 @@
+#postgres://soluwafemi:wCAtkGmAtilCQo6uIvcCUyHYtzAqgKbe@dpg-cg23prl269vfsnufs1k0-a.oregon-postgres.render.com/product_db_xvsd
 spring:
   datasource:
     generate-unique-name: false
-    username: soluwafemi
-    password: wCAtkGmAtilCQo6uIvcCUyHYtzAqgKbe
-    url: jdbc:postgres://dpg-cg23prl269vfsnufs1k0-a.oregon-postgres.render.com:5432/product_db_xvsd
+    username: postgres
+    password: eiNPb5ydmt6Y5aegtVr4
+    url: jdbc:postgresql://containers-us-west-141.railway.app:6018/railway
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
