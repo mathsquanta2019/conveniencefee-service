@@ -4,20 +4,20 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean package'
+        bat 'mvn clean package'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'mvn test'
+        bat 'mvn test'
       }
     }
 
     stage('Sonar Scan') {
       steps {
         withSonarQubeEnv(installationName: 'sns1') {
-          sh 'mvn clean sonar:sonar'
+          bat 'mvn clean sonar:sonar'
         }
       }
     }
@@ -26,7 +26,7 @@ pipeline {
 
     stage('Dockerize and Push') {
       steps {
-        sh 'docker build -t cfs:2.0.0 .'
+        bat 'docker build -t cfs:2.0.0 .'
       }
     }
   }
