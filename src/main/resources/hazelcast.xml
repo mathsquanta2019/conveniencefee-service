@@ -8,7 +8,7 @@
         <property name="hazelcast.management.center.enabled">true</property>
     </properties>
     <security enabled="false">
-        <client-block-unmapped-actions>false</client-block-unmapped-actions>
+
     </security>
     <network>
         <port port-count="100" auto-increment="true">5701</port>
@@ -76,7 +76,7 @@
             <write-delay-seconds>0</write-delay-seconds>
             <write-batch-size>1</write-batch-size>
         </map-store>
-        <near-cache name="default">
+        <near-cache name="convenience.rules.map">
             <in-memory-format>OBJECT</in-memory-format>
             <invalidate-on-change>true</invalidate-on-change>
             <time-to-live-seconds>1200</time-to-live-seconds>
@@ -118,10 +118,10 @@
             <write-delay-seconds>0</write-delay-seconds>
             <write-batch-size>1</write-batch-size>
         </map-store>
-        <near-cache name="default">
+        <near-cache name="subscription.service.map">
             <in-memory-format>OBJECT</in-memory-format>
             <invalidate-on-change>true</invalidate-on-change>
-            <time-to-live-seconds>1200</time-to-live-seconds>
+            <time-to-live-seconds>3600</time-to-live-seconds>
             <max-idle-seconds>60</max-idle-seconds>
             <serialize-keys>false</serialize-keys>
             <cache-local-entries>false</cache-local-entries>
@@ -160,7 +160,7 @@
             <write-delay-seconds>0</write-delay-seconds>
             <write-batch-size>1</write-batch-size>
         </map-store>
-        <near-cache name="default">
+        <near-cache name="customer.management.map">
             <in-memory-format>OBJECT</in-memory-format>
             <invalidate-on-change>true</invalidate-on-change>
             <time-to-live-seconds>1200</time-to-live-seconds>

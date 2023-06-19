@@ -2,12 +2,9 @@ FROM maven:3.8.1-openjdk-17-slim AS build
 
 COPY . .
 
-RUN mvn clean package
-
+RUN mvn clean install -DskipTests
 
 FROM openjdk:17-jdk-alpine
-
-
 
 COPY --from=build /target/cfs.jar cfs.jar
 

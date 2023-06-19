@@ -17,6 +17,8 @@ public class HazelcastConfig {
      */
     @Bean
     public Config cacheConfig(){
-        return new ClasspathXmlConfig("hazelcast.xml");
+        ClasspathXmlConfig config = new ClasspathXmlConfig("hazelcast.xml");
+        config.getSecurityConfig().setEnabled(false);
+        return config;
     }
 }

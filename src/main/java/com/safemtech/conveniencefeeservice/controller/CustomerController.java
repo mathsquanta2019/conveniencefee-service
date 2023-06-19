@@ -55,8 +55,7 @@ public class CustomerController {
     @Cacheable(cacheNames = {"customer.management.map"}, key = "#id",unless = "#result==null")
     public Customer getCustomerById(@RequestParam(name = "id") @NonNull Long id) {
         LOGGER.info("{} retrieved from DB", id);
-        CompletableFuture<Customer> customerFuture = CompletableFuture.supplyAsync(() -> customerService.getCustomerById(id));
-        return customerFuture.join();
+        return customerService.getCustomerById(id);
     }
 
 }
