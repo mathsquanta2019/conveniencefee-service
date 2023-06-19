@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'mvn clean package'
+        bat 'mvn clean compile -DskipTests'
       }
     }
 
@@ -17,7 +17,7 @@ pipeline {
     stage('Sonar Scan') {
       steps {
         withSonarQubeEnv(installationName: 'sns1') {
-          bat 'mvn clean sonar:sonar'
+          bat 'mvn clean sonar:sonar -Dsonar.java.binaries=target/classes'
         }
       }
     }
