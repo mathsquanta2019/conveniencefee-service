@@ -16,17 +16,17 @@ pipeline {
 
     stage('Sonar Scan') {
       steps {
-        withSonarQubeEnv('SonarQube') {
-          sh 'mvn sonar:sonar'
+        withSonarQubeEnv(installationName: 'sns1') {
+          sh 'mvn clean sonar:sonar'
         }
       }
     }
 
+
+
     stage('Dockerize and Push') {
       steps {
-        sh 'docker build -t myapp .'
-        sh 'docker tag myapp localhost:5000/myapp'
-        sh 'docker push localhost:5000/myapp'
+        sh 'docker build -t cfs:2.0.0 .'
       }
     }
   }
