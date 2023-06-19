@@ -18,6 +18,7 @@
         <hazelcast-spring.version>5.3.1</hazelcast-spring.version>
         <drools-core.version>8.39.0.Final</drools-core.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.1.0</springdoc-openapi-starter-webmvc-ui.version>
+        <sonar.java.binaries>${project.build.directory}/classes</sonar.java.binaries>
     </properties>
     <dependencies>
         <dependency>
