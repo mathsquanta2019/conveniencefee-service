@@ -17,7 +17,7 @@ pipeline {
     stage('Sonar Scan') {
       steps {
         withSonarQubeEnv(installationName: 'sns1') {
-          bat 'mvn clean sonar:sonar'
+          bat 'mvn -X clean sonar:sonar'
         }
       }
     }
